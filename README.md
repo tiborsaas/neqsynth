@@ -2,6 +2,8 @@
 
 A polyphonic, browser-based synthesizer that lets you explore tuning systems beyond standard 12-tone equal temperament. Built with TypeScript and the Web Audio API, with no runtime framework dependencies.
 
+![NeqSynth screenshot](https://github.com/user-attachments/assets/262d0026-b9fd-4d3e-83c2-de855f771305)
+
 ---
 
 ## Getting Started
