@@ -395,6 +395,7 @@ button {
   height: 100%;
   flex-shrink: 1;
   overflow: visible;
+  touch-action: none; /* let pointer events through on mobile */
 }
 
 /* SVG text labels */

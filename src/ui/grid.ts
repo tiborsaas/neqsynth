@@ -361,6 +361,14 @@ export class SvgGrid {
             }
         });
 
+        this.el.addEventListener("pointercancel", (e) => {
+            const id = this.pointerHeld.get(e.pointerId);
+            if (id) {
+                this.pointerHeld.delete(e.pointerId);
+                this._releaseCell(id);
+            }
+        });
+
         this.el.addEventListener("pointermove", (e) => {
             if (!this.pointerHeld.has(e.pointerId)) return;
             const cell = this._cellFromEvent(e);
