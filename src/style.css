@@ -61,7 +61,9 @@ button {
   display: grid;
   grid-template:
     "hdr   hdr" 48px
+    "scale ctrl" auto
     "main  ctrl" 1fr
+    "arp   ctrl" auto
     / 1fr 320px;
   height: 100dvh;
   background:
@@ -172,7 +174,9 @@ button {
   #app {
     grid-template:
       "hdr" 48px
+      "scale" auto
       "main" 1fr
+      "arp" auto
       / 1fr;
   }
   .ctrl-toggle {
@@ -190,6 +194,152 @@ button {
   .ctrl-wrap--open {
     transform: translateX(0) !important;
   }
+}
+
+/* ─── Scale bar (top, prominent) ────────────────────────────────────────────── */
+.scale-wrap {
+  grid-area: scale;
+  border-bottom: 1px solid var(--border);
+  background: rgba(8, 8, 20, 0.88);
+  backdrop-filter: blur(8px);
+}
+
+.scale-bar {
+  height: 100%;
+}
+
+.scale-bar-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 16px 8px;
+  gap: 6px;
+}
+
+.scale-bar-btns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+
+.scale-bar .scale-btn {
+  background: var(--btn-bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition:
+    background 0.15s,
+    color 0.15s,
+    border-color 0.15s,
+    box-shadow 0.15s;
+  white-space: nowrap;
+}
+
+.scale-bar .scale-btn:hover {
+  background: var(--btn-hi);
+  color: var(--text-hi);
+  border-color: rgba(124, 111, 247, 0.5);
+}
+
+.scale-bar .scale-btn.active {
+  background: var(--btn-act);
+  color: var(--text-hi);
+  border-color: var(--accent);
+  box-shadow: 0 0 12px rgba(124, 111, 247, 0.4);
+}
+
+.scale-bar-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.scale-bar-info .scale-desc {
+  font-size: 11px;
+  color: var(--text);
+  opacity: 0.8;
+  font-style: italic;
+}
+
+.scale-bar-info .scale-frame {
+  font-size: 10px;
+  color: var(--accent2);
+  opacity: 0.8;
+  font-family: var(--mono);
+}
+
+/* ─── Arp bar (bottom, centered) ────────────────────────────────────────────── */
+.arp-wrap {
+  grid-area: arp;
+  border-top: 1px solid var(--border);
+  background: rgba(8, 8, 20, 0.88);
+  backdrop-filter: blur(8px);
+}
+
+.arp-bar {
+  height: 100%;
+}
+
+.arp-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 8px 16px;
+  flex-wrap: wrap;
+}
+
+.arp-bar-title {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  opacity: 0.8;
+  text-transform: uppercase;
+}
+
+.arp-field {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.arp-field label {
+  font-size: 10px;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.arp-field .num-input.arp-num {
+  width: 56px;
+  grid-column: unset;
+}
+
+.arp-field .select-input {
+  width: auto;
+  min-width: 60px;
+  grid-column: unset;
+}
+
+.arp-field .check-input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent);
+}
+
+.arp-field-gate {
+  gap: 6px;
+}
+
+.arp-field-gate input[type="range"] {
+  width: 80px;
 }
 
 /* ─── Grid area ─────────────────────────────────────────────────────────────── */

@@ -113,10 +113,20 @@ header.innerHTML = `
 }</span>
   </div>`;
 
+// Scale bar (top, above keyboard)
+const scaleWrap = document.createElement("div");
+scaleWrap.className = "scale-wrap";
+scaleWrap.appendChild(controls.scaleEl);
+
 // Grid container
 const gridWrap = document.createElement("main");
 gridWrap.className = "grid-wrap";
 gridWrap.appendChild(grid.el);
+
+// Arp bar (bottom, below keyboard)
+const arpWrap = document.createElement("div");
+arpWrap.className = "arp-wrap";
+arpWrap.appendChild(controls.arpEl);
 
 // Controls sidebar
 const ctrlWrap = document.createElement("aside");
@@ -161,7 +171,9 @@ splash.querySelector(".splash-start")!.addEventListener("click", async () => {
 
 app.appendChild(header);
 app.appendChild(toggleBtn);
+app.appendChild(scaleWrap);
 app.appendChild(gridWrap);
+app.appendChild(arpWrap);
 app.appendChild(ctrlWrap);
 app.appendChild(splash);
 
