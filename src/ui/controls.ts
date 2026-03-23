@@ -126,8 +126,9 @@ export class Controls {
                         "#scale-frame",
                     ) as HTMLElement | null;
                     if (descEl) descEl.textContent = scale.description;
-                    if (frameEl) {frameEl.textContent =
-                            `Frame: ${scale.frameLabel}`;}
+                    if (frameEl) {
+                        frameEl.textContent = `Frame: ${scale.frameLabel}`;
+                    }
                 }
                 this._emit();
             },
@@ -177,7 +178,9 @@ export class Controls {
                     <label class="section-title">WAVEFORM</label>
                     <div class="ctrl-btn-row" id="wave-btns">
                         ${
-            (["sine", "sawtooth", "square", "triangle"] as Waveform[]).map((w) => `
+            (["sine", "sawtooth", "square", "triangle"] as Waveform[]).map((
+                w,
+            ) => `
                             <button class="wave-btn${
                 this.engine.getParam("waveform") === w ? " active" : ""
             }"
