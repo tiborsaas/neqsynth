@@ -164,7 +164,7 @@ export class SvgGrid {
         const cols = this.scale.notes.length;
         const dx = Math.sqrt(3) * r; // horizontal step between cells
         const dy = 1.5 * r; // vertical step between rows
-        const rowOffset = dx / 2;
+        const rowOffset = dx / 2 + 35;
 
         const totalW = PAD * 2 + cols * dx + rowOffset;
         const totalH = PAD * 2 + GRID_ROWS * dy + r;
