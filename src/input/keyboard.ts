@@ -78,9 +78,13 @@ export class KeyboardInput {
     private _onKeyDown(e: KeyboardEvent) {
         if (e.repeat) return;
         if (e.ctrlKey || e.metaKey || e.altKey) return;
-        // Don't steal keys when the user is typing in an input field
+        // Don't steal keys when the user is typing in a text/number input
         const tag = (document.activeElement as HTMLElement | null)?.tagName;
-        if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
+        if (tag === "TEXTAREA" || tag === "SELECT") return;
+        if (tag === "INPUT") {
+            const inputType = (document.activeElement as HTMLInputElement).type;
+            if (inputType === "text" || inputType === "number") return;
+        }
 
         const key = e.key.toLowerCase();
 
