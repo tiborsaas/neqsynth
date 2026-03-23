@@ -234,6 +234,137 @@ $$9 \times 78¢ = 702¢ \approx \log_2(3/2) \times 1200¢$$
 
 ---
 
+### 7 · Prime Sequence
+
+**ID:** `prime`
+
+This scale uses only **prime-numbered harmonics** — 2, 3, 5, 7, 11, 13, 17, 19, 23 — each expressed as a ratio from the root by dividing by 2.
+
+$$\text{ratio}_n = \frac{p_n}{2}, \quad p_n \in \{2, 3, 5, 7, 11, 13, 17, 19, 23\}$$
+
+The frame spans the full range from 2:2 to 23:2, roughly 3.5 octaves. There is no octave repeat.
+
+| Harmonic | Ratio | Cents |
+| -------- | ----- | ----- |
+| 2        | 2:2   | 0     |
+| 3        | 3:2   | 702   |
+| 5        | 5:2   | 1586  |
+| 7        | 7:2   | 2169  |
+| 11       | 11:2  | 2751  |
+| 13       | 13:2  | 2938  |
+| 17       | 17:2  | 3212  |
+| 19       | 19:2  | 3311  |
+| 23       | 23:2  | 3473  |
+
+**Key properties:**
+
+- No composite harmonics (4, 6, 8 …) are present; the scale is the skeleton left when all "blend" overtones are removed.
+- The vast, irregular gaps produce a hollow, metallic timbre — similar to listening to just the structural resonances of a bell with no body.
+- Because the series is infinite, the 9-note window shown is arbitrary; extending it adds ever-larger and more dissonant intervals.
+
+---
+
+### 8 · Quadratic Rubber Band
+
+**ID:** `quadratic`
+
+Step sizes grow **quadratically** rather than linearly. The frequency ratio for degree $n$ is:
+
+$$\text{ratio}_n = 2^{n^2 / k}, \quad k = 50, \quad n \in \{0, 1, \ldots, 10\}$$
+
+| Degree | Cents |
+| ------ | ----- |
+| 0      | 0     |
+| 1      | 24    |
+| 2      | 96    |
+| 3      | 216   |
+| 4      | 384   |
+| 5      | 600   |
+| 6      | 864   |
+| 7      | 1176  |
+| 8      | 1536  |
+| 9      | 1944  |
+| 10     | 2400  |
+
+The frame is $2^{100/50} = 4$ (two octaves).
+
+**Key properties:**
+
+- The lowest notes cluster densely (step 1 ≈ 24¢ — a sixth of a semitone), creating a muddy, microtonally packed bass register.
+- Each successive step is larger than the last, so the high end of the scale expands dramatically — step 9→10 spans 456¢.
+- The scale has no harmonic basis; it is a purely mathematical curiosity that makes conventional pitch perception break down at both extremes.
+
+---
+
+### 9 · Riemann Zeta Zeroes
+
+**ID:** `zeta`
+
+The non-trivial zeros of the Riemann zeta function $\zeta(s)$ all lie (conjecturally) on the **critical line** $\Re(s) = \frac{1}{2}$. Their imaginary parts $\gamma_n$ are used directly as frequency multipliers, normalized to the first zero:
+
+$$\text{ratio}_n = \frac{\gamma_n}{\gamma_1}, \quad \gamma = \{14.135,\ 21.022,\ 25.011,\ 30.425,\ 32.935,\ 37.586,\ 40.919,\ 43.327,\ 48.005,\ 49.774\}$$
+
+| Zero | $\gamma_n$ | Ratio | Cents |
+| ---- | ---------- | ----- | ----- |
+| γ₁   | 14.135     | 1:1   | 0     |
+| γ₂   | 21.022     | ≈1.487 | 688  |
+| γ₃   | 25.011     | ≈1.769 | 990  |
+| γ₄   | 30.425     | ≈2.152 | 1329 |
+| γ₅   | 32.935     | ≈2.330 | 1464 |
+| γ₆   | 37.586     | ≈2.660 | 1697 |
+| γ₇   | 40.919     | ≈2.896 | 1840 |
+| γ₈   | 43.327     | ≈3.066 | 1935 |
+| γ₉   | 48.005     | ≈3.396 | 2116 |
+| γ₁₀  | 49.774     | ≈3.521 | 1981 |
+
+The frame spans $\gamma_{10}/\gamma_1 \approx 3.521:1$ (~1981¢).
+
+**Key properties:**
+
+- The spacings are **pseudo-random but strictly deterministic** — they arise from one of the deepest unsolved problems in mathematics.
+- Unlike noise or random tunings, the zeros follow subtle statistical regularities (GUE distribution) that give the scale a crystalline yet unresolvable character.
+- No interval recurs exactly; the scale never "settles" into a recognizable pattern.
+
+---
+
+### 10 · Stern-Brocot Tree
+
+**ID:** `stern-brocot`
+
+The Stern-Brocot tree is a complete binary tree that enumerates **every positive rational number exactly once**. This scale takes a breadth-first traversal of all rationals between 1:1 and 2:1 down to depth 3, yielding 17 notes sorted by pitch.
+
+At each step the **mediant** of two adjacent fractions $\frac{m}{n}$ and $\frac{m'}{n'}$ is inserted:
+
+$$\text{mediant} = \frac{m + m'}{n + n'}$$
+
+| Ratio | Cents | Tree depth |
+| ----- | ----- | ---------- |
+| 1:1   | 0     | seed       |
+| 6:5   | 316   | 3          |
+| 5:4   | 386   | 2          |
+| 9:7   | 435   | 3          |
+| 4:3   | 498   | 1          |
+| 11:8  | 551   | 3          |
+| 7:5   | 583   | 2          |
+| 10:7  | 617   | 3          |
+| 3:2   | 702   | 0          |
+| 11:7  | 782   | 3          |
+| 8:5   | 814   | 2          |
+| 13:8  | 841   | 3          |
+| 5:3   | 884   | 1          |
+| 12:7  | 933   | 3          |
+| 7:4   | 969   | 2          |
+| 9:5   | 1018  | 3          |
+| 2:1   | 1200  | seed       |
+
+**Key properties:**
+
+- The **earlier** (shallower) a note appears in the tree, the **simpler and more consonant** its ratio is. Playing only the first few degrees gives pure just intervals; adding deeper notes increases dissonance smoothly.
+- The tree guarantees that no two notes share the same ratio; every interval is unique and maximally "efficient" in terms of numerator and denominator size.
+- At depth 3 the scale is a 17-note just intonation tuning that includes many of the most important rational intervals between the octave.
+
+---
+
 ## Synthesis Engine
 
 The synth is a two-oscillator subtractive design built entirely on the Web Audio API:
