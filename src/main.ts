@@ -133,15 +133,41 @@ const ctrlWrap = document.createElement("aside");
 ctrlWrap.className = "ctrl-wrap";
 ctrlWrap.appendChild(controls.el);
 
+// Sidebar close button (visible only on mobile)
+const ctrlClose = document.createElement("button");
+ctrlClose.className = "ctrl-close";
+ctrlClose.innerHTML = "✕";
+ctrlClose.title = "Close controls";
+ctrlWrap.appendChild(ctrlClose);
+
+// Backdrop — dims the grid when the sidebar is open on mobile
+const ctrlBackdrop = document.createElement("div");
+ctrlBackdrop.className = "ctrl-backdrop";
+
+function openSidebar() {
+  ctrlWrap.classList.add("ctrl-wrap--open");
+  ctrlBackdrop.classList.add("ctrl-backdrop--visible");
+}
+function closeSidebar() {
+  ctrlWrap.classList.remove("ctrl-wrap--open");
+  ctrlBackdrop.classList.remove("ctrl-backdrop--visible");
+}
+
+ctrlClose.addEventListener("click", closeSidebar);
+ctrlBackdrop.addEventListener("click", closeSidebar);
+
 // Mobile toggle
 const toggleBtn = document.createElement("button");
 toggleBtn.className = "ctrl-toggle";
 toggleBtn.innerHTML = "⚙";
 toggleBtn.title = "Toggle controls";
-toggleBtn.addEventListener(
-  "click",
-  () => ctrlWrap.classList.toggle("ctrl-wrap--open"),
-);
+toggleBtn.addEventListener("click", () => {
+  if (ctrlWrap.classList.contains("ctrl-wrap--open")) {
+    closeSidebar();
+  } else {
+    openSidebar();
+  }
+});
 
 // Splash screen
 const splash = document.createElement("div");
@@ -175,6 +201,7 @@ app.appendChild(scaleWrap);
 app.appendChild(gridWrap);
 app.appendChild(arpWrap);
 app.appendChild(ctrlWrap);
+app.appendChild(ctrlBackdrop);
 app.appendChild(splash);
 
 // ─── Live voice count ─────────────────────────────────────────────────────────
