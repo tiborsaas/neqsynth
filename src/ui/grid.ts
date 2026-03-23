@@ -374,9 +374,10 @@ export class SvgGrid {
     }
 
     private _cellFromEvent(e: PointerEvent): GridCell | null {
-        const target = (e.target as Element).closest("[data-id]") as
-            | SVGElement
-            | null;
+        // When pointer is captured the target is always the SVG element, so we
+        // use elementFromPoint to find the actual cell under the cursor.
+        const element = document.elementFromPoint(e.clientX, e.clientY);
+        const target = element?.closest("[data-id]") as SVGElement | null;
         if (!target) return null;
         const id = target.getAttribute("data-id");
         return this.cells.find((c) => c.id === id) ?? null;
