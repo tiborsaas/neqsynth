@@ -169,32 +169,6 @@ toggleBtn.addEventListener("click", () => {
   }
 });
 
-// Splash screen
-const splash = document.createElement("div");
-splash.className = "splash";
-splash.innerHTML = `
-  <div class="splash-inner">
-    <div class="splash-logo">𝄞</div>
-    <h2>NeqSynth</h2>
-    <p class="splash-sub">Non-equal temperament polyphonic synthesizer</p>
-    <div class="splash-scales">
-      ${
-  ALL_SCALES.map((s) => `
-        <div class="splash-scale">
-          <strong>${s.name}</strong>
-          <small>${s.description}</small>
-        </div>`).join("")
-}
-    </div>
-    <button class="splash-start">Click to Start</button>
-  </div>`;
-
-splash.querySelector(".splash-start")!.addEventListener("click", async () => {
-  await engine.resume();
-  splash.classList.add("splash--gone");
-  setTimeout(() => splash.remove(), 700);
-});
-
 app.appendChild(header);
 app.appendChild(toggleBtn);
 app.appendChild(scaleWrap);
@@ -202,7 +176,6 @@ app.appendChild(gridWrap);
 app.appendChild(arpWrap);
 app.appendChild(ctrlWrap);
 app.appendChild(ctrlBackdrop);
-app.appendChild(splash);
 
 // ─── Live voice count ─────────────────────────────────────────────────────────
 setInterval(() => {
