@@ -187,12 +187,17 @@ export class SvgGrid {
     private _renderIso() {
         const w = ISO_W, h = ISO_H;
         const cols = this.scale.notes.length;
-        const dx = w * 1.08;
-        const dy = h * 2.2;
-        const stagger = w * 0.54;
+        // dx = full diamond width + tiny gap so tiles are distinct
+        const dx = w * 2 + 4;
+        // dy = h gives a perfect rhombus tessellation:
+        // the top tip of a lower-row diamond reaches the center of the row above.
+        const dy = h;
+        // stagger = half a column step so alternate rows interlock
+        const stagger = dx / 2;
 
+        // height: PAD top + PAD bottom + (GRID_ROWS-1) row-steps + full diamond height
         const totalW = PAD * 2 + cols * dx + stagger;
-        const totalH = PAD * 2 + GRID_ROWS * dy + h;
+        const totalH = PAD * 2 + (GRID_ROWS - 1) * dy + h * 2;
         this.el.setAttribute("viewBox", `0 0 ${totalW} ${totalH}`);
         this.el.setAttribute("width", "100%");
         this.el.setAttribute("height", "100%");
@@ -201,8 +206,8 @@ export class SvgGrid {
             const visualRow = GRID_ROWS - 1 - cell.row;
             const cx = PAD + (cell.col + 0.5) * dx +
                 (visualRow % 2 === 1 ? stagger : 0);
-            const cy = PAD + visualRow * dy + h;
-            this._drawCell(cell, isoPoints(cx, cy, w - 4, h - 3), cx, cy);
+            const cy = PAD + h + visualRow * dy;
+            this._drawCell(cell, isoPoints(cx, cy, w - 2, h - 2), cx, cy);
         }
     }
 
