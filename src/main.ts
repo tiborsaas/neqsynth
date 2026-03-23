@@ -66,7 +66,11 @@ const controls = new Controls(
 
     if (gridChanged) {
       arpeggiator.clear();
-      grid.setScale(getScale(state.scaleId), state.rootFreq, state.octaveOffset);
+      grid.setScale(
+        getScale(state.scaleId),
+        state.rootFreq,
+        state.octaveOffset,
+      );
       lastGridState = {
         scaleId: state.scaleId,
         rootFreq: state.rootFreq,

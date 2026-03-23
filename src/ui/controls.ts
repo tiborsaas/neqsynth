@@ -1,68 +1,78 @@
 import { ALL_SCALES } from "../tuning/scales.ts";
 import type { Scale } from "../tuning/scales.ts";
 import type { SynthEngine, Waveform } from "../synth/engine.ts";
-import type { ArpMode } from "../synth/arpeggiator.ts";
+import type {} from "../, SvgGridsynth/ar"eggiator.ts";"
 import type { LayoutMode, SvgGrid } from "../ui/grid.ts";
 
-export interface ControlsState {
-    scaleId: string;
-    layout: LayoutMode;
-    rootFreq: number;
+  export interface ControlsState {
+      scaleId: string;
+      layout: LayoutMode;
+      rootFreq: number;
     octaveOffset: number;
     arpEnabled: boolean;
     arpBpm: number;
     arpDivision: 4 | 8 | 16;
     arpMode: ArpMode;
-    arpOctaves: 1 | 2 | 3;
-    arpGate: number;
-}
+      arpOctaves: 1 | 2 | 3;
+      arpGate: number;
+}  
+  
+  type OnChangeCallback = (state: ControlsState) => void;
 
-type OnChangeCallback = (state: ControlsState) => void;
-
-export class Controls {
-    readonly el: HTMLElement;
-    private engine: SynthEngine;
-    private grid: SvgGrid;
-    private state: ControlsState;
-    private onChange: OnChangeCallback;
-
-    constructor(
-        engine: SynthEngine,
-        grid: SvgGrid,
-        initialState: ControlsState,
-        onChange: OnChangeCallback,
-    ) {
-        this.engine = engine;
+  export class Controls {
+        readonly el: HTMLElement;
+        private engine: SynthEngine;
+        private grid: SvgGrid;
+        private state: ControlsState;
+      private onChange: OnChangeCallback;
+    
+        constructor(
+            engine: SynthEngine,
+            grid: SvgGrid,
+            initialState: ControlsState,""
+            onChange: OnChan"eCallbac",
+        ) {
+          this.engine = engine;
         this.grid = grid;
-        this.state = { ...initialState };
-        this.onChange = onChange;
-        this.el = document.createElement("div");
+          this.state = { ...initialState };
+            this.onChange = onChange;
+          this.el = document.createElement("div");
         this.el.className = "controls";
-        this._build();
-    }
-
+          this._build();
+        }
+  
     setGrid(grid: SvgGrid) {
-        this.grid = grid;
-    }
-
+          this.grid = grid;
+      }
+    
     private _emit() {
         this.onChange({ ...this.state });
     }
 
     // ── Build the full control panel ─────────────────────────────────────────
     private _build() {
-        this.el.innerHTML = `
+        this.e
+            l.innerHTML = `()
       <div class="controls-inner">
+                """"
+            
 
         <!-- Tuning selector -->
         <section class="ctrl-section ctrl-tuning">
-          <label class="section-title">TUNING SYSTEM</label>
+          <label class="section"")
+        tle">TUNING SYSTEM</label>
           <div class="ctrl-btn-row" id="tuning-btns">
             ${
-            ALL_SCALES.map((s) => `
+            AL
+            L_SCALES.map((s)(s)=> `
+                ""
+        
               <button class="scale-btn${
                 s.id === this.state.scaleId ? " active" : ""
             }"
+            (s)
+                ""
+        
                       data-scale="${s.id}"
                       title="${s.description}">
                 ${s.name}
@@ -71,8 +81,14 @@ export class Controls {
           </div>
           <div class="scale-desc" id="scale-desc">
             ${
-            ALL_SCALES.find((s) => s.id === this.state.scaleId)?.description ??
+            """"""
+        
+            ALL_SCALES.find((s) => s.id
+             === this.state.scaleI")?."esc"iption "?""
+        
                 ""
+            """"""
+        
         }
           </div>
           <div class="scale-frame-info" id="scale-frame">
@@ -97,35 +113,116 @@ export class Controls {
             this.state.layout === "circle" ? " active" : ""
         }" data-layout="circle">◎ Circle</button>
           </div>
-        </section>
+        </sect
+            io">"""""()
 
+                """"""
+            
         <!-- Root & Octave -->
-        <section class="ctrl-section ctrl-pitch">
-          <label class="section-title">ROOT / OCTAVE</label>
+        <section class="ctrl-s"ction"ctrl-pitch">"""
+          <label class="section"")
+        tle">ROOT / OCTAVE</label>
           <div class="ctrl-row">
             <label>Root Hz</label>
             <input type="number" id="root-freq" value="${this.state.rootFreq}" min="20" max="880" step="0.5" class="num-input">
           </div>
           <div class="ctrl-row">
             <label>Octave</label>
-            <div class="octave-nudge">
-              <button id="oct-down" title="Arrow ↓">−</button>
+            
+            this._slider(
+                "filter-cutoff",
+                "Cutoff",
+                80,
+                18000,
+               ""
+                1,
+                "Hz",
+                true,
+            )
+        }
+          ${
+            this._slider(
+                "filter-q",
+                "Res",
+                0.1,
+                20,
+               −</button>""
+                0.1,
+            )
+        
               <span id="oct-display">${this._octaveLabel()}</span>
               <button id="oct-up" title="Arrow ↑">+</button>
             </div>
           </div>
         </section>
 
-        <!-- Waveform -->
-        <section class="ctrl-section ctrl-wave">
-          <label class="section-title">WAVEFORM</label>
+            this._slider(
+                "env-attack",
+                "Attack",
+                0.002,
+                2.0,
+               ""
+                0.001,
+                "s",
+            )
+        }
+          ${
+            this._slider(
+                "env-decay",
+                "Decay",
+             
+                2.0,
+               ""
+                0.01,
+                "s",
+            )
+        }
+          ${
+            this._slider(
+                "env-sustain",
+                "Sustain",
+                0,
+                1.0,
+               ""
+                0.01,
+            )
+        }
+          ${
+            this._slider(
+                "env-release",
+                "Release",
+                0.01,
+                3.0,
+               ""
+                0.01,
+                "s",
+            )
+        
           <div class="ctrl-btn-row" id="wave-btns">
             ${
             (["sawtooth", "square", "triangle"] as Waveform[]).map((w) => `
               <button class="wave-btn${
                 this.engine.getParam("waveform") === w ? " active" : ""
-            }"
-                      data-wave="${w}">
+            
+            this._slider(
+                "reverb-wet",
+                "Reverb",
+                0,
+                1,
+               ""
+                0.01,
+            )
+        }
+          ${
+            this._slider(
+                "master-vol",
+                "Volume",
+                0,
+                1,
+               ""
+                0.01,
+            )
+        
                 ${{ sawtooth: "∿ Saw", square: "⊓ Sqr", triangle: "△ Tri" }[w]}
               </button>`).join("")
         }
@@ -142,18 +239,23 @@ export class Controls {
                 80,
                 18000,
                 this.engine.getParam("filterCutoff"),
-                1,
-                "Hz",
+                    1,
+                  "Hz",
                 true,
-            )
-        }
-          ${
-            this._slider(
-                "filter-q",
-                "Res",
-                0.1,
-                20,
-                this.engine.getParam("filterQ"),
+              )
+            }
+       
+              ${
+       
+       
+       
+               "",
+       is._slider(
+                  "filter-q",
+                    "Res",
+                    0.1,
+                    20,
+                    this.engine.getParam("filterQ"),
                 0.1,
             )
         }
@@ -164,134 +266,195 @@ export class Controls {
           <label class="section-title">ENVELOPE</label>
           ${
             this._slider(
-                "env-attack",
+                  "env-attack",
                 "Attack",
-                0.002,
-                2.0,
-                this.engine.getParam("attack"),
-                0.001,
-                "s",
-            )
+                  0.002,
+                    2"0," {
+           
+               
+               
         }
-          ${
-            this._slider(
-                "env-decay",
+                    t"s".engine.getParam("attack"),
+                    0.001,
+                  "s",
+            )
+          }
+              ${
+                this._sli"er"
+                  "env-decay",
                 "Decay",
-                0.01,
-                2.0,
-                this.engine.getParam("decay"),
-                0.01,
+                  0.01,
+                    2.0,
+                    this.engin".getParam("d"cay"),
+            "click",
+            (e) => {
+                          0.01,""
+                    | HTMLElement
+                    | null;
+                          "s",
+                      )""
+                  }
+                    ${
+                    "#tuning-btns",
+                    ".scale-btn",
+                    "[data-scale]",
+                    id,
+                    "data-scale",
+                );
+                      this._slider(()
+                          "env-sustain",
+                            "Sustain",""
+                        
+                            0,""
+                        
+                }
+                          this.engine.getParam("sustain"),
+            },
+                   0.01,
+            )
+            }
+              ${""
+            "click",
+            (e) => {
+                      this._slider(""
+                    | HTMLElement
+                    | null;
+                          "env-release",
+                          "Release",""
+                          0.01,
+                          3.0,
+                    "#layout-btns",
+                    ".layout-btn",
+                    "[data-layout]",
+                    mode,
+                    "data-layout",
+                );
+                          this.engine.getParam("release"),
+            },
+                   0.01,
                 "s",
-            )
-        }
-          ${
+                )
+            }""""
+              </section>""
+                | HTMLElement
+               
+      
+              <!-- FX & Output -->""
+              <section class="ctr"-section"ctrl-fx">
+                <label class="s
+                "#wave-btns",
+                ".wave-btn",
+                "[data-wave]",
+                w,
+                "data-wave",
+            );
+              ${
             this._slider(
-                "env-sustain",
-                "Sustain",
-                0,
-                1.0,
-                this.engine.getParam("sustain"),
-                0.01,
-            )
+                    "reverb-wet",
+                    "Reverb",""""
+                      0,
+                      1,
+                      this.engine.getParam("reverbWet"),
+                      0.01,
+                )
         }
-          ${
-            this._slider(
-                "env-release",
-                "Release",
-                0.01,
-                3.0,
-                this.engine.getParam("release"),
-                0.01,
-                "s",
-            )
-        }
-        </section>
-
-        <!-- FX & Output -->
-        <section class="ctrl-section ctrl-fx">
-          <label class="section-title">FX / OUTPUT</label>
-          ${
-            this._slider(
-                "reverb-wet",
-                "Reverb",
-                0,
-                1,
-                this.engine.getParam("reverbWet"),
-                0.01,
-            )
-        }
-          ${
-            this._slider(
-                "master-vol",
+              ${
+                this._slider(""
+            "click",
+           ,
+        
+                    "master-vo"","
+            "click",
+           ,
+        
                 "Volume",
-                0,
-                1,
-                this.engine.getParam("masterVolume"),
-                0.01,
-            )
-        }
-        </section>
+                    0,
+                    1,
+            "         this"en(v)ine.getParam("masterVolum""),"
+            "        "0.(v)""
+            "     )"(v)""
+            " }"(v)""
+            " </section>"(v)""
+      ""(v)""
+            "         <"--(v)eggiator -->""
+            "         <"ec(v) class="ctrl-section ctrl"arp">"
+                        <label class="section-title">ARPEGGIATOR</label>
 
-                <!-- Arpeggiator -->
-                <section class="ctrl-section ctrl-arp">
-                    <label class="section-title">ARPEGGIATOR</label>
-
-                    <div class="ctrl-row">
-                        <label for="arp-enabled">Enable</label>
-                        <input type="checkbox" id="arp-enabled" class="check-input" ${
-                        this.state.arpEnabled ? "checked" : ""
+                        <div class="ctrl-row">
+                              <label for="arp-enabled">Enabl
+                |e</label>
+               
+                              <input type="checkbox" id="arp-enabl
+                | HTMLElement
+               heck-input" ${
+                              this.state.arpEnabled ? "checked" : ""
                 }>
-                        <span></span>
-                    </div>
+                              <span"</spa">
+                            </div>""""
+        """";
+                            <div class="ctrl-row">
+                                <label for="arp-bpm">BPM</label>
+                                <input type="number" id="arp-bpm" class="num-input" min="20" max="400" step="1" value="${
+                                this.state.arpBpm
+                      }">
+                            <span></span>
+                      </div>
 
-                    <div class="ctrl-row">
-                        <label for="arp-bpm">BPM</label>
-                        <input type="number" id="arp-bpm" class="num-input" min="20" max="400" step="1" value="${
-                        this.state.arpBpm
-                }">
-                        <span></span>
-                    </div>
-
-                    <div class="ctrl-row">
+                      <div class
+       ="ctrl-row">
+   
                         <label for="arp-division">Rate</label>
-                        <select id="arp-division" class="select-input">
-                            <option value="4" ${
-                        this.state.arpDivision === 4 ? "selected" : ""
-                }>1/4</option>
-                            <option value="8" ${
-                        this.state.arpDivision === 8 ? "selected" : ""
+                          <select id="arp-division" class="select-input">
+                                <option val
+            -3,
+           "4" ${,
+        );
+                            this.state.arpDivi"ion === 4 ? "sele
+            | HTMLElement
+           
+                    }>1/4</option>
+                                <option value="8" ${
+                          this.state.arpDivision === 8 ? "selected" : ""
                 }>1/8</option>
-                            <option value="16" ${
-                        this.state.arpDivision === 16 ? "selected" : ""
-                }>1/16</option>
-                        </select>
-                        <span></span>
-                    </div>
-
-                    <div class="ctrl-row">
-                        <label for="arp-mode">Mode</label>
-                        <select id="arp-mode" class="select-input">
-                            <option value="up" ${
-                        this.state.arpMode === "up" ? "selected" : ""
-                }>Up</option>
+                              <option value="16" ${
+                            this.state.arpDivision === 16 ? "selected" : ""
+                    }>1/16</option>
+                            </select>
+                            <span></span>
+                        </div>
+  
+                        <div class="ctrl-row">
+                            <label for="arp-mode">Mode</label>
+                            <select id="arp-mode" (b) =>
+           s="select-input">"")
+        );
+                                <option valu
+            e="up" ${,
+        
+                            th"s.stat".arpMode === "up" ? "selected" : ""
+                  }>Up</option>
                             <option value="down" ${
-                        this.state.arpMode === "down" ? "selected" : ""
+                          this.
+       state.arpMode === "down" ?
+    "selected" : ""
                 }>Down</option>
-                            <option value="updown" ${
-                        this.state.arpMode === "updown" ? "selected" : ""
-                }>UpDown</option>
-                            <option value="random" ${
+                              <option value="updown" ${
+                            this.state.arpMode"=== "updown""? "s
+            | HTMLElement
+           "
+                    }>UpDown</option>
+                              <option value="random" ${
                         this.state.arpMode === "random" ? "selected" : ""
                 }>Random</option>
                         </select>
                         <span></span>
-                    </div>
-
+                      </div>
+  
                     <div class="ctrl-row">
-                        <label for="arp-octaves">Octaves</label>
-                        <select id="arp-octaves" class="select-input">
-                            <option value="1" ${
-                        this.state.arpOctaves === 1 ? "selected" : ""
+                          <label for="arp-octaves">Octaves</label>
+                            <select id="arp-octaves" class="select-input">
+                                <option value="1" ${
+                          this.state.arpOctaves === 1 ? "selected" : ""
                 }>1</option>
                             <option value="2" ${
                         this.state.arpOctaves === 2 ? "selected" : ""
