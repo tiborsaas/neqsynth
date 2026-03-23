@@ -1,4 +1,4 @@
-export type Waveform = "sawtooth" | "square" | "triangle";
+export type Waveform = "sine" | "sawtooth" | "square" | "triangle";
 
 export interface SynthParams {
     waveform: Waveform;
@@ -14,7 +14,7 @@ export interface SynthParams {
 }
 
 export const DEFAULT_PARAMS: SynthParams = {
-    waveform: "sawtooth",
+    waveform: "sine",
     filterCutoff: 3200,
     filterQ: 1.8,
     attack: 0.01,
