@@ -20,7 +20,8 @@ export interface ControlsState {
 type OnChangeCallback = (state: ControlsState) => void;
 
 const WAVE_LABELS: Record<string, string> = {
-    sawtooth: "\u223F Saw",
+    sine: "\u223F Sine",
+    sawtooth: "\u2A3F Saw",
     square: "\u2293 Sqr",
     triangle: "\u25B3 Tri",
 };
@@ -176,7 +177,7 @@ export class Controls {
                     <label class="section-title">WAVEFORM</label>
                     <div class="ctrl-btn-row" id="wave-btns">
                         ${
-            (["sawtooth", "square", "triangle"] as Waveform[]).map((w) => `
+            (["sine", "sawtooth", "square", "triangle"] as Waveform[]).map((w) => `
                             <button class="wave-btn${
                 this.engine.getParam("waveform") === w ? " active" : ""
             }"
